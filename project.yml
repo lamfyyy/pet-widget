@@ -1,0 +1,46 @@
+name: Pet
+options:
+  bundleIdPrefix: com.example
+  deploymentTarget:
+    iOS: "17.0"
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  Pet:
+    type: application
+    platform: iOS
+    sources: [App, Shared]
+    dependencies:
+      - target: PetWidget
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: Pet
+        UILaunchScreen: {}
+    entitlements:
+      path: App/Pet.entitlements
+      properties:
+        com.apple.security.application-groups: [group.com.example.pet]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.pet
+  PetWidget:
+    type: app-extension
+    platform: iOS
+    sources: [Widget, Shared]
+    info:
+      path: Widget/Info.plist
+      properties:
+        CFBundleDisplayName: Pet Widget
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    entitlements:
+      path: Widget/PetWidget.entitlements
+      properties:
+        com.apple.security.application-groups: [group.com.example.pet]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.pet.widget
